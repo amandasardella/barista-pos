@@ -1,4 +1,4 @@
-require("dotenv").config(); // carrega variáveis do .env no começo do arquivo
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -7,7 +7,7 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 
-// Pega a variável de ambiente MONGODB_URI
+//var of ONGODB_URI
 const uri = process.env.MONGODB_URI;
 
 if (!uri) {
@@ -23,7 +23,7 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err.message);
-    process.exit(1); // encerra a aplicação se não conectar
+    process.exit(1);
   });
 
 app.use(cors());
