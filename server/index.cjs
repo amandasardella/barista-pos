@@ -1,3 +1,5 @@
+require("dotenv").config(); // carrega variáveis do .env no começo do arquivo
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,9 +7,24 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 
-mongoose.connect(
-  "mongodb+srv://amandansardella:mKnvpFA3gpBZmGFe@barista-pos.mdrl1mk.mongodb.net/?retryWrites=true&w=majority&appName=barista-pos"
-);
+// Pega a variável de ambiente MONGODB_URI
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  console.error("MONGODB_URI is not defined. Check your .env file!");
+  process.exit(1);
+}
+
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err.message);
+    process.exit(1); // encerra a aplicação se não conectar
+  });
 
 app.use(cors());
 app.use(express.json());
@@ -57,7 +74,7 @@ app.put("/:id", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log("POST / received body:", req.body); // <-- Log para depurar
+  console.log("POST / received body:", req.body);
   try {
     const order = new Order({
       drink: req.body.drink,
@@ -68,10 +85,10 @@ app.post("/", async (req, res) => {
     });
 
     const saved = await order.save();
-    console.log("Order saved:", saved); // <-- Log para confirmar salvamento
+    console.log("Order saved:", saved);
     res.status(201).json(saved);
   } catch (err) {
-    console.error("Error saving order:", err); // <-- Log de erro
+    console.error("Error saving order:", err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -80,7 +97,7 @@ app.get("/by-date", async (req, res) => {
   const { date } = req.query;
 
   if (!date) {
-    return res.status(400).json({ error: "Data não fornecida" });
+    return res.status(400).json({ error: "Date not provided" });
   }
 
   const start = new Date(date);
