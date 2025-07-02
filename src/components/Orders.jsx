@@ -187,21 +187,20 @@ export default function Orders() {
     }
 
     return (
-      <div>
-        <p>{label}:</p>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <div className="mb-4">
+        <p className="font-medium mb-2">{label}:</p>
+        <div className="flex flex-wrap gap-2">
           {options.map((opt) => (
             <button
               key={opt}
               type="button"
               onClick={() => handleClick(opt)}
-              style={{
-                border: selected === opt ? "2px solid blue" : "1px solid gray",
-                backgroundColor: selected === opt ? "#cce4ff" : "white",
-                cursor: "pointer",
-                padding: "6px 12px",
-                borderRadius: "4px",
-              }}
+              className={`px-3 py-1 rounded border cursor-pointer
+            ${
+              selected === opt
+                ? "bg-blue-200 border-blue-500"
+                : "bg-white border-gray-400"
+            }`}
             >
               {opt}
             </button>
@@ -213,25 +212,32 @@ export default function Orders() {
 
   return (
     <div>
-      <h2>Register Order</h2>
+      <h2 className="text-2xl font-semibold mb-4">Register Order</h2>
 
-      <div style={{ marginBottom: "12px" }}>
-        <button type="button" onClick={() => handleTabChange("coffee")}>
-          Hot Espresso Beverages
-        </button>
-        <button type="button" onClick={() => handleTabChange("teaLatte")}>
-          Tea Lattes
-        </button>
-        <button type="button" onClick={() => handleTabChange("teas")}>
-          Brewed Teas
-        </button>
-        <button type="button" onClick={() => handleTabChange("iced")}>
-          Iced Beverages
-        </button>
-        <button type="button" onClick={() => setActiveTab("totalOrders")}>
-          Total Orders
-        </button>
-      </div>
+      <nav className="flex flex-wrap gap-3 mb-6">
+        {[
+          { key: "coffee", label: "Hot Espresso Beverages" },
+          { key: "teaLatte", label: "Tea Lattes" },
+          { key: "teas", label: "Brewed Teas" },
+          { key: "iced", label: "Iced Beverages" },
+          { key: "totalOrders", label: "Total Orders" },
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => setActiveTab(key)}
+            className={`px-4 py-2 rounded-md font-medium transition 
+          ${
+            activeTab === key
+              ? "bg-blue-600 text-white shadow-md"
+              : "bg-gray-200 text-gray-700 hover:bg-blue-100"
+          }
+          cursor-pointer`}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
 
       {activeTab === "totalOrders" ? (
         <TotalOrders />
@@ -259,48 +265,53 @@ export default function Orders() {
               setSelected={setSyrup}
             />
 
-            <label style={{ display: "block", marginTop: "12px" }}>
+            <label className="block mt-3 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={decaf}
                 onChange={(e) => setDecaf(e.target.checked)}
-              />{" "}
+                className="mr-2 w-4 h-4 rounded border-gray-300 focus:ring- focus:ring-blue-500"
+              />
               Decaf
             </label>
 
-            <label style={{ display: "block", marginTop: "12px" }}>
+            <label className="block mt-3 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={extraShot}
                 onChange={(e) => setExtraShot(e.target.checked)}
-              />{" "}
+                className="mr-2 w-4 h-4 rounded border-gray-300 focus:ring-1 focus:ring-blue-500"
+              />
               Extra Espresso Shot
             </label>
 
-            <button
-              type="submit"
-              style={{ marginTop: "12px", padding: "8px 16px", cursor: "pointer" }}
-            >
-              Submit Order
-            </button>
-          </form>
+            <div className="flex items-center justify-between mt-4">
+  <button
+    type="submit"
+    className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors cursor-pointer"
+  >
+    Submit Order
+  </button>
 
-          <div style={{ marginTop: "12px" }}>
-            <button
-              type="button"
-              onClick={repeatLastOrder}
-              style={{ marginRight: "8px", padding: "8px 16px", cursor: "pointer" }}
-            >
-              Repeat Last Order
-            </button>
-            <button
-              type="button"
-              onClick={deleteLastOrder}
-              style={{ padding: "8px 16px", cursor: "pointer" }}
-            >
-              Delete Last Order
-            </button>
-          </div>
+  <div>
+    <button
+      type="button"
+      onClick={repeatLastOrder}
+      className="mr-2 px-4 py-2 bg-green-200 hover:bg-green-300 rounded cursor-pointer"
+    >
+      Repeat Last Order
+    </button>
+    <button
+      type="button"
+      onClick={deleteLastOrder}
+      className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded cursor-pointer"
+    >
+      Delete Last Order
+    </button>
+  </div>
+</div>
+
+          </form>
         </>
       )}
 
