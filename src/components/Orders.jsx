@@ -16,8 +16,9 @@ export default function Orders() {
   const [syrup, setSyrup] = useState(null);
   const [decaf, setDecaf] = useState(false);
   const [extraShot, setExtraShot] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(" ");
   const [lastOrderId, setLastOrderId] = useState(null);
+  
 
   function handleTabChange(tab) {
     setActiveTab(tab);
@@ -120,7 +121,7 @@ export default function Orders() {
   }
 
   return (
-    <div className="max-w-screen-lg mx-auto px-4 py-6">
+    <div className="max-w-screen-lg mx-auto px-2 py-3">
       <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Register Order</h1>
 
       <nav className="flex flex-wrap justify-center gap-3 mb-8">
@@ -180,30 +181,35 @@ export default function Orders() {
 </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 mt-6">
-            <button
-              type="submit"
-              className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors"
-            >
-              Submit Order
-            </button>
+  {/* Botão Submit alinhado à direita */}
+  <div className="w-full sm:w-auto order-2 sm:order-2 flex justify-end">
+    <button
+      type="submit"
+      className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors"
+    >
+      Submit Order
+    </button>
+  </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto justify-center">
-              <button
-                type="button"
-                onClick={repeatLastOrder}
-                className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
-              >
-                Repeat Last Order
-              </button>
-              <button
-                type="button"
-                onClick={deleteLastOrder}
-                className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
-              >
-                Delete Last Order
-              </button>
-            </div>
-          </div>
+  {/* Outros botões alinhados à esquerda */}
+  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto justify-start order-1 sm:order-1">
+    <button
+      type="button"
+      onClick={repeatLastOrder}
+      className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
+    >
+      Repeat Last Order
+    </button>
+    <button
+      type="button"
+      onClick={deleteLastOrder}
+      className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
+    >
+      Delete Last Order
+    </button>
+  </div>
+</div>
+          
         </form>
       )}
 
