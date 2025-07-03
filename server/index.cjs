@@ -26,32 +26,8 @@ mongoose
     process.exit(1);
   });
 
-app.use(
-  cors({
-    origin:
-      "https://barista-pos-rsed-lgrcyne1j-amanda-sardellas-projects.vercel.app",
-  })
-);
+app.use(cors());
 app.use(express.json());
-
-const allowedOrigins = [
-  "https://barista-pos-rsed-lgrcyne1j-amanda-sardellas-projects.vercel.app",
-  "https://barista-pos-rsed.vercel.app",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // permite Postman ou CURL
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
 
 const OrderSchema = new mongoose.Schema({
   drink: { type: String, required: true },
