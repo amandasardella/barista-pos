@@ -1,72 +1,123 @@
-# Title
-
-**Coffee Order Tracker**
+# ☕ Coffee Order Tracker
 
 ## Description
 
-This POS (Point of Sale) is a full-stack application designed to modernize and streamline the coffee order system in the workplace. Inspired by my real experience as a Barista Supervisor, this project replaces manual order tracking with a digital solution to improve speed, accuracy, and inventory management.
-The **Coffee Order Tracker** allows baristas to register, view, and analyze beverage orders efficiently — saving time and enhancing workflow accuracy. This project demonstrates practical experience in designing, developing, and deploying real-world software using modern web technologies.
+**Coffee Order Tracker** is a full-stack POS (Point of Sale) application designed to modernize and streamline the coffee order system in the workplace.
+Inspired by my real experience as a **Barista Supervisor**, this project replaces manual order tracking with a digital solution to improve **speed**, **accuracy**, and **inventory management**.
+The system allows baristas to **register**, **view**, and **analyze** beverage orders efficiently — saving time and enhancing workflow accuracy.
+This project demonstrates practical experience in **designing**, **developing**, and **deploying** real-world software using modern web technologies.
 
-## Build with
+---
 
-## Installation & Setup
+## 🧩 Built With
 
-Follow these steps to set up and run the Coffee Order Tracker locally:
+### Frontend
 
-### Clone the repository
+- **React**
+- **JavaScript**
+- **TailwindCSS**: for responsive design
+- **Axios**: for REST API requests
 
-```
+### Backend
+
+- **Node.js** + **Express**: for building the RESTful API
+- **MongoDB Atlas**: for cloud-based data storage
+
+---
+
+## ⚙️ Installation & Setup
+
+Follow these steps to set up and run **Coffee Order Tracker** locally:
+
+- ### 1 Clone the repository
+
+```bash
 git clone https://github.com/your-github/barista-pos.git
 cd barista-pos
 ```
 
-### Install dependencies
+- ### 2 Install dependencies
 
 Install the required packages for both backend and frontend:
 
-Backend
+**Backend**
 
-```
+```bash
 cd server
 npm install
 ```
 
-Front end
+**Frontend**
 
-```
+```bash
 cd ../
 npm install
 ```
 
-### Configure environment variables
+---
 
-Create a .env file inside the server directory with the following content:
+- ### 3 Configure environment variables
 
-```
+Create a `.env` file inside the **server** directory with the following content:
+
+```bash
 MONGODB_URI=your_mongodb_connection_string
+PORT=3001
 ```
 
-- You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document)
+💡 You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document).
 
-### Start the back end server
+---
 
-```
+- ### 4 Start the backend server
+
+```bash
 cd server
 node index.cjs
 ```
 
-### Run the frontend
+You should see:
 
 ```
+✅ Connected to MongoDB
+🚀 Server running on http://localhost:3001
+```
+
+---
+
+- ### 5 Run the frontend
+
+```bash
 npm run dev
 ```
 
-## Test the application
+The app will be available at:
+
+```
+http://localhost:5173
+```
+
+## Test the Application
 
 - Register a new coffee or tea order using the form
+- Repeat or delete the last order to test CRUD functionality
+- View total orders by date in the **“Total Orders”** tab
+- Export order data to Excel to verify reporting
 
-- Repeat or delete the last order to test CRUD features
+## Project Goals
 
-- Check total orders by date in the “Total Orders” tab
+- Build a **functional POS system** for real-world use
+- Practice **full-stack development** using MERN technologies
+- Demonstrate **problem-solving** applied to workflow automation
+- Provide a **responsive and intuitive UI** for baristas
 
-- Export data to Excel to verify reporting
+## License
+
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
+
+## Contact
+
+**Amanda Sardella**  
+Full-Stack Developer | Toronto, Canada  
+🔗 [LinkedIn](https://linkedin.com/in/your-linkedin)  
+💻 [GitHub](https://github.com/your-github)
