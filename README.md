@@ -9,7 +9,7 @@ This project demonstrates practical experience in **designing**, **developing**,
 
 ---
 
-## 🧩 Built With
+## Built With
 
 ### Frontend
 
@@ -25,7 +25,7 @@ This project demonstrates practical experience in **designing**, **developing**,
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 Follow these steps to set up and run **Coffee Order Tracker** locally:
 
@@ -79,8 +79,8 @@ node index.cjs
 You should see:
 
 ```
-✅ Connected to MongoDB
-🚀 Server running on http://localhost:3001
+Connected to MongoDB
+Server running on http://localhost:3001
 ```
 
 ---
