@@ -97,13 +97,6 @@ Follow these steps to set up and run **Coffee Order Tracker** locally:
 - View total orders by date in the **“Total Orders”** tab
 - Export order data to Excel to verify reporting
 
-## Project Goals
-
-- Build a **functional POS system** for real-world use
-- Practice **full-stack development** using MERN technologies
-- Demonstrate **problem-solving** applied to workflow automation
-- Provide a **responsive and intuitive UI** for baristas
-
 ## Future Improvements
 
 - **User Login System:**  
