@@ -2,12 +2,13 @@
 
 ## Description
 
-**Coffee Order Tracker** is a full-stack POS (Point of Sale) application designed to modernize and streamline the coffee order system in the workplace.
-Inspired by my real experience as a **Barista Supervisor**, this project replaces manual order tracking with a digital solution to improve **speed**, **accuracy**, and **inventory management**.
-The system allows baristas to **register**, **view**, and **analyze** beverage orders efficiently — saving time and enhancing workflow accuracy.
-This project demonstrates practical experience in **designing**, **developing**, and **deploying** real-world software using modern web technologies.
+This project is a **workplace-adapted POS (Point of Sale)** system built to **streamline beverage order tracking** and improve **operational efficiency** for baristas and managers.  
+Inspired by my real-world experience as a Barista Supervisor, this system replaces manual, paper-based tracking with a digital workflow to enhance speed, accuracy, and visibility of daily operations.
 
----
+Unlike traditional POS systems, this version is designed for a **non-commercial environment**, where beverages are **offered as a benefit to employees** rather than sold.  
+The focus is on **order management**, **data tracking**, and **inventory insights** — helping to optimize service flow and supply management without involving payment processing.
+
+Through this project, I demonstrate hands-on experience in **full-stack development**, **API design**, and **data handling** using modern web technologies.
 
 ## Built With
 
@@ -22,8 +23,6 @@ This project demonstrates practical experience in **designing**, **developing**,
 
 - **Node.js** + **Express**: for building the RESTful API
 - **MongoDB Atlas**: for cloud-based data storage
-
----
 
 ## Installation & Setup
 
@@ -40,14 +39,14 @@ cd barista-pos
 
 Install the required packages for both backend and frontend:
 
-**Backend**
+- **Backend**
 
 ```bash
 cd server
 npm install
 ```
 
-**Frontend**
+- **Frontend**
 
 ```bash
 cd ../
@@ -65,7 +64,7 @@ MONGODB_URI=your_mongodb_connection_string
 PORT=3001
 ```
 
-💡 You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document).
+- 💡 You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document).
 
 ---
 
@@ -76,7 +75,7 @@ cd server
 node index.cjs
 ```
 
-You should see:
+- You should see:
 
 ```
 Connected to MongoDB
@@ -91,7 +90,7 @@ Server running on http://localhost:3001
 npm run dev
 ```
 
-The app will be available at:
+- The app will be available at:
 
 ```
 http://localhost:5173
@@ -111,6 +110,14 @@ http://localhost:5173
 - Demonstrate **problem-solving** applied to workflow automation
 - Provide a **responsive and intuitive UI** for baristas
 
+## Future Improvements
+
+- **User Login System:**  
+  Add authentication for baristas and managers to track usage and maintain secure access.
+
+- **Payment Functionality:**  
+  Introduce a multi-order “cart” feature to register several beverages in one submission.
+
 ## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
@@ -119,5 +126,5 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 **Amanda Sardella**  
 Full-Stack Developer | Toronto, Canada  
-🔗 [LinkedIn](https://linkedin.com/in/your-linkedin)  
-💻 [GitHub](https://github.com/your-github)
+🔗 [LinkedIn](https://www.linkedin.com/in/amanda-sardella/)  
+💻 [GitHub](https://github.com/amandasardella)
