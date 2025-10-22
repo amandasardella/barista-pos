@@ -2,12 +2,40 @@ import React, { useState } from "react";
 import api from "../../services/api";
 import TotalOrders from "./TotalOrders";
 
-const coffeeDrinks = ["Americano", "Cappuccino", "Espresso", "Latte", "Mocha"].sort();
-const teaLattes = ["Chai", "English Breakfast Tea Latte", "London Fog", "Matcha", "Syrup Cream", "Hot Chocolate"].sort();
+const coffeeDrinks = [
+  "Americano",
+  "Cappuccino",
+  "Espresso",
+  "Latte",
+  "Mocha",
+].sort();
+const teaLattes = [
+  "Chai",
+  "English Breakfast Tea Latte",
+  "London Fog",
+  "Matcha",
+  "Syrup Cream",
+  "Hot Chocolate",
+].sort();
 const teas = ["Berry", "Breakfast", "Earl Grey", "Jasmine", "Mint"].sort();
-const icedDrinks = ["Iced Americano", "Iced Chai", "Iced Latte", "Iced Matcha", "Iced Mocha", "Iced Syrup Cream"].sort();
+const icedDrinks = [
+  "Iced Americano",
+  "Iced Chai",
+  "Iced Latte",
+  "Iced Matcha",
+  "Iced Mocha",
+  "Iced Syrup Cream",
+].sort();
 const milks = ["2%", "Oat", "Lactose Free"];
-const syrups = ["Vanilla", "Hazelnut", "Caramel", "Sugar Cane", "Sugar-Free Vanilla", "Sugar-Free Hazelnut", "Chai"];
+const syrups = [
+  "Vanilla",
+  "Hazelnut",
+  "Caramel",
+  "Sugar Cane",
+  "Sugar-Free Vanilla",
+  "Sugar-Free Hazelnut",
+  "Chai",
+];
 
 export default function Orders() {
   const [activeTab, setActiveTab] = useState("coffee");
@@ -18,7 +46,6 @@ export default function Orders() {
   const [extraShot, setExtraShot] = useState(false);
   const [message, setMessage] = useState(" ");
   const [lastOrderId, setLastOrderId] = useState(null);
-  
 
   function handleTabChange(tab) {
     setActiveTab(tab);
@@ -48,7 +75,13 @@ export default function Orders() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await api.post("/", { drink, milk, syrup, decaf, extraShot });
+      const res = await api.post("/orders", {
+        drink,
+        milk,
+        syrup,
+        decaf,
+        extraShot,
+      });
       setMessage("Order successfully created!");
       setLastOrderId(res.data._id);
       handleTabChange(activeTab);
@@ -59,12 +92,16 @@ export default function Orders() {
 
   async function repeatLastOrder() {
     try {
-      const res = await api.get("/last-order");
+      const res = await api.get("/orders/last");
       const lastOrder = res.data;
-      const newTab =
-        teaLattes.includes(lastOrder.drink) ? "teaLatte" :
-        teas.includes(lastOrder.drink) ? "teas" :
-        icedDrinks.includes(lastOrder.drink) ? "iced" : "coffee";
+
+      const newTab = teaLattes.includes(lastOrder.drink)
+        ? "teaLatte"
+        : teas.includes(lastOrder.drink)
+        ? "teas"
+        : icedDrinks.includes(lastOrder.drink)
+        ? "iced"
+        : "coffee";
 
       setActiveTab(newTab);
       setDrink(lastOrder.drink);
@@ -72,10 +109,25 @@ export default function Orders() {
       setSyrup(lastOrder.syrup);
       setDecaf(!!lastOrder.decaf);
       setExtraShot(!!lastOrder.extraShot);
-      setMessage("Last order loaded into form.");
       setLastOrderId(lastOrder._id);
+
+      const duplicate = await api.post("/orders", {
+        drink: lastOrder.drink,
+        milk: lastOrder.milk,
+        syrup: lastOrder.syrup,
+        decaf: lastOrder.decaf,
+        extraShot: lastOrder.extraShot,
+      });
+
+      setMessage(
+        `☕ Last order repeated successfully! (New ID: ${duplicate.data._id})`
+      );
     } catch (err) {
-      setMessage(err.response?.status === 404 ? "No previous orders found." : "Error loading last order.");
+      setMessage(
+        err.response?.status === 404
+          ? "ℹ️ No previous orders found."
+          : "❌ Error repeating last order."
+      );
     }
   }
 
@@ -91,12 +143,13 @@ export default function Orders() {
     }
   }
 
-  const drinksList = {
-    coffee: coffeeDrinks,
-    teaLatte: teaLattes,
-    teas: teas,
-    iced: icedDrinks,
-  }[activeTab] || coffeeDrinks;
+  const drinksList =
+    {
+      coffee: coffeeDrinks,
+      teaLatte: teaLattes,
+      teas: teas,
+      iced: icedDrinks,
+    }[activeTab] || coffeeDrinks;
 
   function RenderOptions({ options, selected, setSelected, label }) {
     return (
@@ -109,7 +162,9 @@ export default function Orders() {
               type="button"
               onClick={() => setSelected(selected === opt ? null : opt)}
               className={`px-3 py-1 rounded border text-sm cursor-pointer ${
-                selected === opt ? "bg-blue-200 border-blue-500" : "bg-white border-gray-400"
+                selected === opt
+                  ? "bg-blue-200 border-blue-500"
+                  : "bg-white border-gray-400"
               }`}
             >
               {opt}
@@ -122,7 +177,9 @@ export default function Orders() {
 
   return (
     <div className="max-w-screen-lg mx-auto px-2 py-3">
-      <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Register Order</h1>
+      <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-center">
+        Register Order
+      </h1>
 
       <nav className="flex flex-wrap justify-center gap-3 mb-8">
         {[
@@ -151,69 +208,88 @@ export default function Orders() {
         <TotalOrders />
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
-          <RenderOptions label="Drink" options={drinksList} selected={drink} setSelected={setDrink} />
-          <RenderOptions label="Milk" options={milks} selected={milk} setSelected={setMilk} />
-          <RenderOptions label="Syrup" options={syrups} selected={syrup} setSelected={setSyrup} />
+          <RenderOptions
+            label="Drink"
+            options={drinksList}
+            selected={drink}
+            setSelected={setDrink}
+          />
+          <RenderOptions
+            label="Milk"
+            options={milks}
+            selected={milk}
+            setSelected={setMilk}
+          />
+          <RenderOptions
+            label="Syrup"
+            options={syrups}
+            selected={syrup}
+            setSelected={setSyrup}
+          />
 
           {/* Options Section */}
-<div className="mb-4">
-  <p className="font-medium mb-2">Options:</p>
-  <div className="flex flex-wrap gap-2">
-    <button
-      type="button"
-      onClick={() => setDecaf(!decaf)}
-      className={`px-3 py-1 rounded border text-sm cursor-pointer ${
-        decaf ? "bg-blue-200 border-blue-500" : "bg-white border-gray-400"
-      }`}
-    >
-      Decaf
-    </button>
-    <button
-      type="button"
-      onClick={() => setExtraShot(!extraShot)}
-      className={`px-3 py-1 rounded border text-sm cursor-pointer ${
-        extraShot ? "bg-blue-200 border-blue-500" : "bg-white border-gray-400"
-      }`}
-    >
-      Extra Shot
-    </button>
-  </div>
-</div>
+          <div className="mb-4">
+            <p className="font-medium mb-2">Options:</p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setDecaf(!decaf)}
+                className={`px-3 py-1 rounded border text-sm cursor-pointer ${
+                  decaf
+                    ? "bg-blue-200 border-blue-500"
+                    : "bg-white border-gray-400"
+                }`}
+              >
+                Decaf
+              </button>
+              <button
+                type="button"
+                onClick={() => setExtraShot(!extraShot)}
+                className={`px-3 py-1 rounded border text-sm cursor-pointer ${
+                  extraShot
+                    ? "bg-blue-200 border-blue-500"
+                    : "bg-white border-gray-400"
+                }`}
+              >
+                Extra Shot
+              </button>
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 mt-6">
-  {/* Botão Submit alinhado à direita */}
-  <div className="w-full sm:w-auto order-2 sm:order-2 flex justify-end">
-    <button
-      type="submit"
-      className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors"
-    >
-      Submit Order
-    </button>
-  </div>
+            {/* Botão Submit alinhado à direita */}
+            <div className="w-full sm:w-auto order-2 sm:order-2 flex justify-end">
+              <button
+                type="submit"
+                className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors"
+              >
+                Submit Order
+              </button>
+            </div>
 
-  {/* Outros botões alinhados à esquerda */}
-  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto justify-start order-1 sm:order-1">
-    <button
-      type="button"
-      onClick={repeatLastOrder}
-      className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
-    >
-      Repeat Last Order
-    </button>
-    <button
-      type="button"
-      onClick={deleteLastOrder}
-      className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
-    >
-      Delete Last Order
-    </button>
-  </div>
-</div>
-          
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto justify-start order-1 sm:order-1">
+              <button
+                type="button"
+                onClick={repeatLastOrder}
+                className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
+              >
+                Repeat Last Order
+              </button>
+              <button
+                type="button"
+                onClick={deleteLastOrder}
+                className="px-4 py-2 bg-green-200 hover:bg-green-300 rounded w-full sm:w-auto"
+              >
+                Delete Last Order
+              </button>
+            </div>
+          </div>
         </form>
       )}
 
-      {message && <p className="mt-4 text-center text-blue-700 font-medium">{message}</p>}
+      {message && (
+        <p className="mt-4 text-center text-blue-700 font-medium">{message}</p>
+      )}
     </div>
   );
 }

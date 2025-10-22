@@ -119,7 +119,9 @@ export default function TotalOrders() {
                   <th className="px-4 py-2 text-center">Decaf</th>
                   <th className="px-4 py-2 text-center">Extra Shot</th>
                   <th className="px-4 py-2 text-right">Count</th>
-                  <th className="px-4 py-2 text-right">Latest Order Date/Time</th>
+                  <th className="px-4 py-2 text-right">
+                    Latest Order Date/Time
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -132,8 +134,12 @@ export default function TotalOrders() {
                         <td className="px-4 py-2">{obj.drink}</td>
                         <td className="px-4 py-2">{obj.milk || "-"}</td>
                         <td className="px-4 py-2">{obj.syrup || "-"}</td>
-                        <td className="text-center px-4 py-2">{obj.decaf ? "Yes" : "No"}</td>
-                        <td className="text-center px-4 py-2">{obj.extraShot ? "Yes" : "No"}</td>
+                        <td className="text-center px-4 py-2">
+                          {obj.decaf ? "Yes" : "No"}
+                        </td>
+                        <td className="text-center px-4 py-2">
+                          {obj.extraShot ? "Yes" : "No"}
+                        </td>
                         <td className="text-right px-4 py-2">{data.count}</td>
                         <td className="px-4 py-2 text-right">
                           {data.latestDate.toLocaleString("en-CA", {
