@@ -28,73 +28,67 @@ Through this project, I demonstrate hands-on experience in **full-stack developm
 
 Follow these steps to set up and run **Coffee Order Tracker** locally:
 
-- ### 1 Clone the repository
+1. Clone the repository
 
-```bash
-git clone https://github.com/your-github/barista-pos.git
-cd barista-pos
-```
+   ```bash
+   git clone https://github.com/your-github/barista-pos.git
+   cd barista-pos
+   ```
 
-- ### 2 Install dependencies
+2. Install dependencies
 
-Install the required packages for both backend and frontend:
+   Install the required packages for both backend and frontend:
 
-- **Backend**
+   - **Backend**
 
-```bash
-cd server
-npm install
-```
+   ```bash
+   cd server
+   npm install
+   ```
 
-- **Frontend**
+   - **Frontend**
 
-```bash
-cd ../
-npm install
-```
+   ```bash
+   cd ../
+   npm install
+   ```
 
----
+3. Configure environment variables
 
-- ### 3 Configure environment variables
+   Create a `.env` file inside the **server** directory with the following content:
 
-Create a `.env` file inside the **server** directory with the following content:
+   ```bash
+   MONGODB_URI=your_mongodb_connection_string
+   PORT=3001
+   ```
 
-```bash
-MONGODB_URI=your_mongodb_connection_string
-PORT=3001
-```
+   > 💡 You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document).
 
-- 💡 You can get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/products/platform#document).
+4. Start the backend server
 
----
+   ```bash
+   cd server
+   node index.cjs
+   ```
 
-- ### 4 Start the backend server
+   - You should see:
 
-```bash
-cd server
-node index.cjs
-```
+   ```
+   Connected to MongoDB
+   Server running on http://localhost:3001
+   ```
 
-- You should see:
+5. Run the frontend
 
-```
-Connected to MongoDB
-Server running on http://localhost:3001
-```
+   ```bash
+   npm run dev
+   ```
 
----
+   - The app will be available at:
 
-- ### 5 Run the frontend
-
-```bash
-npm run dev
-```
-
-- The app will be available at:
-
-```
-http://localhost:5173
-```
+   ```
+   http://localhost:5173
+   ```
 
 ## Test the Application
 
