@@ -27,7 +27,6 @@ export default function TotalOrders() {
     }
   }
 
-  // Agora retorna count e latestDate (data do pedido mais recente)
   function countFullOrders(orders) {
     return orders.reduce((acc, order) => {
       const keyObj = {
@@ -126,7 +125,7 @@ export default function TotalOrders() {
               </thead>
               <tbody>
                 {Object.entries(fullOrdersCount)
-                  .sort((a, b) => b[1].count - a[1].count) // Ordena do maior para o menor count
+                  .sort((a, b) => b[1].count - a[1].count)
                   .map(([desc, data]) => {
                     const obj = JSON.parse(desc);
                     return (

@@ -83,7 +83,7 @@ export default function Orders() {
         extraShot,
       });
 
-      setMessage("✅ Order successfully registered!");
+      setMessage("Order successfully registered!");
 
       setLastOrderId(res.data._id);
       handleTabChange(activeTab);
@@ -124,13 +124,13 @@ export default function Orders() {
       });
 
       setMessage(
-        `☕ Last order repeated successfully! (New ID: ${duplicate.data._id})`
+        `Last order repeated successfully! (New ID: ${duplicate.data._id})`
       );
     } catch (err) {
       setMessage(
         err.response?.status === 404
-          ? "ℹ️ No previous orders found."
-          : "❌ Error repeating last order."
+          ? "No previous orders found."
+          : "Error repeating last order."
       );
     }
   }
