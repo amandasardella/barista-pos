@@ -51,7 +51,7 @@ export default function Orders() {
     setActiveTab(tab);
     setDecaf(false);
     setExtraShot(false);
-    setMessage("");
+    // setMessage("");
     switch (tab) {
       case "coffee":
         setDrink(coffeeDrinks[0]);
@@ -82,11 +82,15 @@ export default function Orders() {
         decaf,
         extraShot,
       });
-      setMessage("Order successfully created!");
+
+      setMessage("✅ Order successfully registered!");
+
       setLastOrderId(res.data._id);
       handleTabChange(activeTab);
     } catch (err) {
-      setMessage("Error: " + (err.response?.data?.error || err.message));
+      setMessage(
+        "Error registering order: " + (err.response?.data?.error || err.message)
+      );
     }
   }
 
@@ -134,7 +138,7 @@ export default function Orders() {
   async function deleteLastOrder() {
     if (!lastOrderId) return setMessage("No order to delete.");
     try {
-      await api.delete(`/${lastOrderId}`);
+      await api.delete(`/orders/${lastOrderId}`);
       setMessage("Last order deleted.");
       setLastOrderId(null);
       handleTabChange(activeTab);

@@ -17,7 +17,7 @@ export default function TotalOrders() {
   async function fetchOrdersByDate(dateStr) {
     setLoading(true);
     try {
-      const res = await api.get(`/by-date?date=${dateStr}`);
+      const res = await api.get(`/orders/by-date?date=${dateStr}`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching orders:", err);
